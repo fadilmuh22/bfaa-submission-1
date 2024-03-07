@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">BFAA Submission 1</string>
+
+    <string name="home_title">Popular users</string>
+    <string name="menu_search">Search</string>
+    <string name="searchbar_hint">Search username</string>
+
+    <string name="tab_text_1">Followers</string>
+    <string name="tab_text_2">Following</string>
+    <string name="no_followers">This user haven\'t followed anyone yet</string>
+    <string name="no_following">This user hasn\'t been followed by anyone yet</string>
+</resources>
