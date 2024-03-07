@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Username"
+            android:text="@string/p_name"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@id/profile_image"
             app:layout_constraintStart_toEndOf="@id/profile_image"

@@ -18,7 +18,7 @@ import com.example.bfaasubmission1.ui.adapter.UserListAdapter
 class ProfileFollowingFragment(
     private val githubUser: GithubUser?,
 ) : Fragment() {
-    private val viewModel: ProfileFollowingViewModel by viewModels()
+    private val viewModel by viewModels<ProfileFollowingViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,12 +46,15 @@ class ProfileFollowingFragment(
     }
 
     private fun showLoading(view: View) {
+        val rvUsers: RecyclerView = view.findViewById(R.id.rvFollowing)
         val progressBar: View = view.findViewById(R.id.progressBarFollowing)
-        viewModel.isLoading.observe(this) { isLoading ->
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
+                rvUsers.visibility = View.GONE
                 progressBar.visibility = View.VISIBLE
             } else {
                 progressBar.visibility = View.GONE
+                rvUsers.visibility = View.VISIBLE
             }
         }
     }
@@ -59,17 +62,20 @@ class ProfileFollowingFragment(
     private fun showErrorMessage() {
         viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
             if (errorMessage != null) {
-                Toast.makeText(activity, "Error: $errorMessage\nSilahkan refresh halaman", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    activity,
+                    "Error: $errorMessage\nSilahkan refresh halaman",
+                    Toast.LENGTH_SHORT,
+                ).show()
             }
         }
     }
 
     fun showFollowers(view: View) {
-        val rvUsers: RecyclerView = view.findViewById(R.id.rvUsers)
-        val tvNoFollows: TextView = view.findViewById(R.id.tvNoFollows)
+        val rvUsers: RecyclerView = view.findViewById(R.id.rvFollowing)
+        val tvNoFollows: TextView = view.findViewById(R.id.tvNoFollowing)
 
         viewModel.following.observe(viewLifecycleOwner) { users ->
-
             users?.let {
                 if (it.isEmpty()) {
                     rvUsers.visibility = View.GONE
@@ -83,6 +89,10 @@ class ProfileFollowingFragment(
                         LinearLayoutManager.VERTICAL,
                     ),
                 )
+
+                if (rvUsers.adapter != null) {
+                    rvUsers.invalidate()
+                }
             }
         }
     }

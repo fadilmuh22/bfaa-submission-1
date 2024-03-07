@@ -48,9 +48,9 @@ class MainActivity : AppCompatActivity() {
     private fun showLoading() {
         viewModel.isLoading.observe(this) { isLoading ->
             if (isLoading) {
-                binding.progressBar.visibility = android.view.View.VISIBLE
+                binding.progressBarMain.visibility = android.view.View.VISIBLE
             } else {
-                binding.progressBar.visibility = android.view.View.GONE
+                binding.progressBarMain.visibility = android.view.View.GONE
             }
         }
     }
@@ -66,8 +66,8 @@ class MainActivity : AppCompatActivity() {
     private fun showMostFollowedUsers() {
         viewModel.githubUsers.observe(this) { users ->
             users?.let {
-                binding.rvUsers.adapter = UserListAdapter(it)
-                binding.rvUsers.addItemDecoration(
+                binding.rvPopularUsers.adapter = UserListAdapter(it)
+                binding.rvPopularUsers.addItemDecoration(
                     DividerItemDecoration(
                         baseContext,
                         LinearLayoutManager.VERTICAL,

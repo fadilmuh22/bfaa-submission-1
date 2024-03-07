@@ -1,7 +1,6 @@
 package com.example.bfaasubmission1.ui.profile
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +18,7 @@ import com.example.bfaasubmission1.ui.adapter.UserListAdapter
 class ProfileFollowersFragment(
     private val githubUser: GithubUser?,
 ) : Fragment() {
-    private val viewModel: ProfileFollowersViewModel by viewModels()
+    private val viewModel by viewModels<ProfileFollowersViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,12 +47,15 @@ class ProfileFollowersFragment(
     }
 
     private fun showLoading(view: View) {
+        val rvUsers: RecyclerView = view.findViewById(R.id.rvFollowers)
         val progressBar: View = view.findViewById(R.id.progressBarFollowers)
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
+                rvUsers.visibility = View.GONE
                 progressBar.visibility = View.VISIBLE
             } else {
                 progressBar.visibility = View.GONE
+                rvUsers.visibility = View.VISIBLE
             }
         }
     }
@@ -61,18 +63,20 @@ class ProfileFollowersFragment(
     private fun showErrorMessage() {
         viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
             if (errorMessage != null) {
-                Toast.makeText(activity, "Error: $errorMessage\nSilahkan refresh halaman", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    activity,
+                    "Error: $errorMessage\nSilahkan refresh halaman",
+                    Toast.LENGTH_SHORT,
+                ).show()
             }
         }
     }
 
     fun showFollowers(view: View) {
-        val rvUsers: RecyclerView = view.findViewById(R.id.rvUsers)
-        val tvNoFollows: TextView = view.findViewById(R.id.tvNoFollows)
+        val rvUsers: RecyclerView = view.findViewById(R.id.rvFollowers)
+        val tvNoFollows: TextView = view.findViewById(R.id.tvNoFollowers)
 
         viewModel.followers.observe(viewLifecycleOwner) { users ->
-            Log.d("ProfileFollowersFragment", "showFollowers: $users")
-
             users?.let {
                 if (it.isEmpty()) {
                     rvUsers.visibility = View.GONE
@@ -89,6 +93,10 @@ class ProfileFollowersFragment(
                         LinearLayoutManager.VERTICAL,
                     ),
                 )
+
+                if (rvUsers.adapter != null) {
+                    rvUsers.invalidate()
+                }
             }
         }
     }

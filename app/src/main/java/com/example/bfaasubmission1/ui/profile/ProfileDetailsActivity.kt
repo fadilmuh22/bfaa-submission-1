@@ -44,7 +44,7 @@ class ProfileDetailsActivity : AppCompatActivity() {
             insets
         }
 
-        setSupportActionBar(binding.topAppBar)
+        setSupportActionBar(binding.topAppBarProfile)
 
         val githubUser =
             if (Build.VERSION.SDK_INT >= 33) {
@@ -53,8 +53,6 @@ class ProfileDetailsActivity : AppCompatActivity() {
                 @Suppress("DEPRECATION")
                 intent.getParcelableExtra(EXTRA_GITHUB_USER)
             }
-
-        showErrorMessage()
 
         githubUser?.let {
             setTitle("${it.login}'s details")
@@ -66,6 +64,9 @@ class ProfileDetailsActivity : AppCompatActivity() {
             }
             showUserView(it)
         }
+
+        showLoading()
+        showErrorMessage()
 
         viewModel.githubUserDetails.observe(this) { githubUserDetails ->
             githubUserDetails?.let {
@@ -80,6 +81,20 @@ class ProfileDetailsActivity : AppCompatActivity() {
         supportActionBar?.elevation = 0f
     }
 
+    private fun showLoading() {
+        viewModel.isLoading.observe(this) { isLoading ->
+            if (isLoading) {
+                binding.tvName.visibility = View.GONE
+                binding.tvFollows.visibility = View.GONE
+                binding.progressBarProfile.visibility = View.VISIBLE
+            } else {
+                binding.tvName.visibility = View.VISIBLE
+                binding.tvFollows.visibility = View.VISIBLE
+                binding.progressBarProfile.visibility = View.GONE
+            }
+        }
+    }
+
     private fun showErrorMessage() {
         viewModel.errorMessage.observe(this) { errorMessage ->
             if (errorMessage != null) {
@@ -91,7 +106,7 @@ class ProfileDetailsActivity : AppCompatActivity() {
     private fun showUserView(githubUser: GithubUser) {
         Glide.with(this)
             .load(githubUser.avatarUrl)
-            .into(binding.profileImage)
+            .into(binding.imgProfile)
 
         binding.tvUsername.text = githubUser.login
     }

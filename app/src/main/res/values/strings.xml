@@ -9,4 +9,7 @@
     <string name="tab_text_2">Following</string>
     <string name="no_followers">This user haven\'t followed anyone yet</string>
     <string name="no_following">This user hasn\'t been followed by anyone yet</string>
+    <string name="p_username">\@username</string>
+    <string name="p_name">Name</string>
+    <string name="p_follows">0 followers · 0 following</string>
 </resources>

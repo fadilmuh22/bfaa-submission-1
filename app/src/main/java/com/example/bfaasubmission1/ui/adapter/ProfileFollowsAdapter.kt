@@ -27,11 +27,9 @@ class SectionsPagerAdapter(
     }
 
     override fun createFragment(position: Int): Fragment {
-        var fragment: Fragment? = null
-        when (position) {
-            0 -> fragment = ProfileFollowersFragment(githubUser)
-            1 -> fragment = ProfileFollowingFragment(githubUser)
+        return when (Section.entries[position]) {
+            Section.FOLLOWERS -> ProfileFollowersFragment(githubUser)
+            Section.FOLLOWING -> ProfileFollowingFragment(githubUser)
         }
-        return fragment as Fragment
     }
 }

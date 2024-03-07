@@ -7,7 +7,7 @@
     tools:context=".ui.profile.ProfileFollowersFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvUsers"
+        android:id="@+id/rvFollowers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -20,17 +20,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="32dp"
-        android:visibility="gone"/>
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
 
     <TextView
-        android:id="@+id/tvNoFollows"
+        android:id="@+id/tvNoFollowers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/no_followers"
-        android:textSize="18sp"
         android:textAlignment="center"
-        android:visibility="gone"/>
+        android:textSize="18sp"
+        android:visibility="gone" />
 
 </FrameLayout>

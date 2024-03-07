@@ -8,27 +8,22 @@
     tools:context=".ui.profile.ProfileDetailsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayoutProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topAppBar"
+            android:id="@+id/topAppBarProfile"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"/>
+            android:layout_height="?attr/actionBarSize" />
 
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_image"
+                android:id="@+id/imgProfile"
                 android:layout_width="96dp"
                 android:layout_height="96dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -36,43 +31,49 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tvName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Name"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@id/profile_image"
-                app:layout_constraintStart_toStartOf="@id/profile_image"
-                app:layout_constraintTop_toBottomOf="@id/profile_image" />
-
-            <TextView
                 android:id="@+id/tvUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/p_username"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@id/imgProfile"
+                app:layout_constraintStart_toStartOf="@id/imgProfile"
+                app:layout_constraintTop_toBottomOf="@id/imgProfile" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="\@username"
+                android:text="@string/p_name"
                 android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/tvUsername"
+                app:layout_constraintStart_toStartOf="@id/tvUsername"
+                app:layout_constraintTop_toBottomOf="@id/tvUsername" />
+
+            <TextView
+                android:id="@+id/tvFollows"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/p_follows"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@id/tvName"
                 app:layout_constraintStart_toStartOf="@id/tvName"
                 app:layout_constraintTop_toBottomOf="@id/tvName" />
 
-            <LinearLayout
-                android:id="@+id/llFollows"
+            <ProgressBar
+                android:id="@+id/progressBarProfile"
+                style="?android:attr/progressBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="@id/tvUsername"
-                app:layout_constraintStart_toStartOf="@id/tvUsername"
-                app:layout_constraintTop_toBottomOf="@id/tvUsername">
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="@id/tvFollows"
+                app:layout_constraintEnd_toEndOf="@id/tvFollows"
+                app:layout_constraintTop_toTopOf="@id/tvFollows"/>
 
-                <TextView
-                    android:id="@+id/tvFollows"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="10 followers · 4 following" />
-            </LinearLayout>
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabs"
@@ -80,21 +81,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:background="?attr/colorPrimary"
-                app:layout_constraintEnd_toEndOf="@id/llFollows"
-                app:layout_constraintStart_toStartOf="@id/llFollows"
-                app:layout_constraintTop_toBottomOf="@id/llFollows"
+                app:layout_constraintEnd_toEndOf="@id/tvFollows"
+                app:layout_constraintStart_toStartOf="@id/tvFollows"
+                app:layout_constraintTop_toBottomOf="@id/tvFollows"
                 app:tabTextColor="@android:color/white" />
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/view_pager"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@id/tabs"
-                app:layout_constraintStart_toStartOf="@id/tabs"
-                app:layout_constraintTop_toBottomOf="@id/tabs" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
