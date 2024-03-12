@@ -4,8 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.bfaasubmission1.data.response.GithubUser
-import com.example.bfaasubmission1.ui.profile.ProfileFollowersFragment
-import com.example.bfaasubmission1.ui.profile.ProfileFollowingFragment
+import com.example.bfaasubmission1.ui.profile.ProfileFollowsFragment
 
 enum class Section {
     FOLLOWERS,
@@ -28,8 +27,8 @@ class SectionsPagerAdapter(
 
     override fun createFragment(position: Int): Fragment {
         return when (Section.entries[position]) {
-            Section.FOLLOWERS -> ProfileFollowersFragment(githubUser)
-            Section.FOLLOWING -> ProfileFollowingFragment(githubUser)
+            Section.FOLLOWERS -> ProfileFollowsFragment(Section.entries[position], githubUser)
+            Section.FOLLOWING -> ProfileFollowsFragment(Section.entries[position], githubUser)
         }
     }
 }

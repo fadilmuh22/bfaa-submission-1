@@ -13,12 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bfaasubmission1.R
 import com.example.bfaasubmission1.data.response.GithubUser
+import com.example.bfaasubmission1.ui.adapter.Section
 import com.example.bfaasubmission1.ui.adapter.UserListAdapter
 
-class ProfileFollowersFragment(
+class ProfileFollowsFragment(
+    private val section: Section,
     private val githubUser: GithubUser?,
 ) : Fragment() {
-    private val viewModel by viewModels<ProfileFollowersViewModel>()
+    private val viewModel by viewModels<ProfileFollowsViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,7 +29,7 @@ class ProfileFollowersFragment(
     ): View {
         super.onCreate(savedInstanceState)
 
-        return inflater.inflate(R.layout.fragment_profile_followers, container, false)
+        return inflater.inflate(R.layout.fragment_profile_follows, container, false)
     }
 
     override fun onViewCreated(
@@ -38,17 +40,20 @@ class ProfileFollowersFragment(
 
         githubUser?.let {
             viewModel.run {
-                getFollowers(it)
+                when (section) {
+                    Section.FOLLOWERS -> getFollowers(it)
+                    Section.FOLLOWING -> getFollowing(it)
+                }
             }
         }
         showLoading(view)
         showErrorMessage()
-        showFollowers(view)
+        showFollows(view)
     }
 
     private fun showLoading(view: View) {
-        val rvUsers: RecyclerView = view.findViewById(R.id.rvFollowers)
-        val progressBar: View = view.findViewById(R.id.progressBarFollowers)
+        val rvUsers: RecyclerView = view.findViewById(R.id.rvFollows)
+        val progressBar: View = view.findViewById(R.id.progressBarFollows)
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
                 rvUsers.visibility = View.GONE
@@ -72,11 +77,17 @@ class ProfileFollowersFragment(
         }
     }
 
-    fun showFollowers(view: View) {
-        val rvUsers: RecyclerView = view.findViewById(R.id.rvFollowers)
-        val tvNoFollows: TextView = view.findViewById(R.id.tvNoFollowers)
+    private fun showFollows(view: View) {
+        val rvUsers: RecyclerView = view.findViewById(R.id.rvFollows)
+        val tvNoFollows: TextView = view.findViewById(R.id.tvNoFollows)
 
-        viewModel.followers.observe(viewLifecycleOwner) { users ->
+        val followsLiveData =
+            when (section) {
+                Section.FOLLOWERS -> viewModel.followers
+                Section.FOLLOWING -> viewModel.following
+            }
+
+        followsLiveData.observe(viewLifecycleOwner) { users ->
             users?.let {
                 if (it.isEmpty()) {
                     rvUsers.visibility = View.GONE
