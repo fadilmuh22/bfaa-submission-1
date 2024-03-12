@@ -1,13 +1,15 @@
 <resources>
-    <string name="app_name">BFAA Submission 1</string>
+    <string name="app_name">BFAA Submission 2</string>
 
     <string name="home_title">Popular users</string>
-    <string name="favorite_title">Favorite users</string>
-    <string name="menu_search">Search</string>
-    <string name="menu_favorites">Favorites</string>
     <string name="menu_theme">Theme</string>
-
+    <string name="menu_search">Search</string>
     <string name="searchbar_hint">Search username</string>
+    <string name="search_validation">Please input more than 3 characters</string>
+
+    <string name="favorite_title">Favorite users</string>
+    <string name="menu_favorites">Favorites</string>
+    <string name="no_favorites">You haven\'t add anyone to your favorites</string>
 
     <string name="error_title">Error</string>
     <string name="error_refresh">Please refresh the page.</string>
@@ -23,4 +25,5 @@
     <string name="p_username">\@username</string>
     <string name="p_name">Name</string>
     <string name="p_follows">0 followers · 0 following</string>
+    <string name="profile_share">Share</string>
 </resources>

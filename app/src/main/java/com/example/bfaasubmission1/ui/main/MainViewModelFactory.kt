@@ -1,6 +1,5 @@
 package com.example.bfaasubmission1.ui.main
 
-import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.ViewModel
@@ -26,13 +25,10 @@ class MainViewModelFactory private constructor(
             @Volatile
             private var instance: MainViewModelFactory? = null
 
-            fun getInstance(
-                context: Context,
-                dataStore: DataStore<Preferences>,
-            ): MainViewModelFactory =
+            fun getInstance(dataStore: DataStore<Preferences>): MainViewModelFactory =
                 instance ?: synchronized(this) {
                     instance ?: MainViewModelFactory(
-                        Injection.provideGithubUsersRepository(context),
+                        Injection.provideGithubUsersRepository(),
                         Injection.provideSettingPreferences(dataStore),
                     )
                 }.also { instance = it }

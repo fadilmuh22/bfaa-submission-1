@@ -5,6 +5,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.bfaasubmission1.data.remote.response.GithubUser
+import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "favorite_users")
@@ -17,8 +18,8 @@ data class FavoriteUserEntity(
     var login: String,
     @ColumnInfo("avatar_url")
     val avatarUrl: String,
-    @ColumnInfo("url")
-    val url: String,
+    @field:SerializedName("html_url")
+    val htmlUrl: String,
 ) : Parcelable {
     companion object {
         fun fromGithubUser(githubUser: GithubUser) =
@@ -26,7 +27,7 @@ data class FavoriteUserEntity(
                 id = githubUser.id,
                 login = githubUser.login,
                 avatarUrl = githubUser.avatarUrl,
-                url = githubUser.url,
+                htmlUrl = githubUser.htmlUrl,
             )
     }
 }

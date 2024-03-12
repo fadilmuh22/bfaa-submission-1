@@ -12,7 +12,7 @@ import com.example.bfaasubmission1.data.remote.response.GithubUser
 import com.example.bfaasubmission1.databinding.UserItemRowBinding
 import com.example.bfaasubmission1.ui.profile.ProfileDetailsActivity
 
-class UserListAdapter() : ListAdapter<GithubUser, UserListAdapter.UserViewHolder>(DIFF_CALLBACK) {
+class UserListAdapter : ListAdapter<GithubUser, UserListAdapter.UserViewHolder>(DIFF_CALLBACK) {
     inner class UserViewHolder(private val binding: UserItemRowBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(user: GithubUser) {

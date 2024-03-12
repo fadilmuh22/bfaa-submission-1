@@ -38,30 +38,55 @@
                     android:layout_height="96dp"
                     android:layout_marginTop="100dp" />
 
-                <TextView
-                    android:id="@+id/tvUsername"
-                    android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/p_username"
-                    android:textSize="18sp" />
+                    android:layout_marginTop="16dp">
 
-                <TextView
-                    android:id="@+id/tvName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/p_name"
-                    android:textSize="16sp"
-                    android:visibility="gone" />
+                    <TextView
+                        android:id="@+id/tvUsername"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/p_username"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/tvFollows"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/p_follows"
-                    android:visibility="gone" />
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/p_name"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="@id/tvUsername"
+                        app:layout_constraintStart_toStartOf="@id/tvUsername"
+                        app:layout_constraintTop_toBottomOf="@id/tvUsername" />
+
+                    <TextView
+                        android:id="@+id/tvFollows"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/p_follows"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="@id/tvName"
+                        app:layout_constraintStart_toStartOf="@id/tvName"
+                        app:layout_constraintTop_toBottomOf="@id/tvName" />
+
+                    <Button
+                        android:id="@+id/btnShareUser"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:text="@string/profile_share"
+                        app:layout_constraintBaseline_toTopOf="@id/tvName"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:textColor="@color/white"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <ProgressBar
                     android:id="@+id/progressBarProfile"

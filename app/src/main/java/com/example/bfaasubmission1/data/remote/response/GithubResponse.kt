@@ -22,8 +22,8 @@ data class GithubUser(
     val login: String,
     @field:SerializedName("avatar_url")
     val avatarUrl: String,
-    @field:SerializedName("url")
-    val url: String,
+    @field:SerializedName("html_url")
+    val htmlUrl: String,
 ) : Parcelable {
     companion object {
         fun fromFavoriteUserEntity(favoriteUserEntity: FavoriteUserEntity) =
@@ -31,7 +31,7 @@ data class GithubUser(
                 id = favoriteUserEntity.id,
                 login = favoriteUserEntity.login,
                 avatarUrl = favoriteUserEntity.avatarUrl,
-                url = favoriteUserEntity.url,
+                htmlUrl = favoriteUserEntity.htmlUrl,
             )
     }
 }
@@ -46,8 +46,8 @@ data class GithubUserDetails(
     val name: String?,
     @field:SerializedName("avatar_url")
     val avatarUrl: String,
-    @field:SerializedName("url")
-    val url: String,
+    @field:SerializedName("html_url")
+    val htmlUrl: String,
     @field:SerializedName("followers")
     val followers: Int,
     @field:SerializedName("following")

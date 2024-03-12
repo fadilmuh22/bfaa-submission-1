@@ -1,5 +1,6 @@
 package com.example.bfaasubmission1.ui.profile
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -30,7 +31,7 @@ class ProfileDetailsActivity : AppCompatActivity() {
     }
 
     private val viewModel: ProfileDetailsViewModel by viewModels {
-        ProfileDetailsViewModelFactory.getInstance(this, application)
+        ProfileDetailsViewModelFactory.getInstance(application)
     }
 
     private val binding by lazy { ActivityProfileDetailsBinding.inflate(layoutInflater) }
@@ -57,6 +58,7 @@ class ProfileDetailsActivity : AppCompatActivity() {
             showUserView(it)
             showUserDetailsView(githubUser)
             setFavoriteFab(it)
+            setShareUser(it)
         }
 
         binding.viewPager.adapter = SectionsPagerAdapter(this, githubUser)
@@ -91,6 +93,23 @@ class ProfileDetailsActivity : AppCompatActivity() {
             .into(binding.imgProfile)
 
         binding.tvUsername.text = githubUser.login
+    }
+
+    private fun setShareUser(githubUser: GithubUser) {
+        binding.btnShareUser.setOnClickListener {
+            val shareText = "Check out this awesome developer @${githubUser.login}"
+            val shareIntent =
+                Intent.createChooser(
+                    Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, githubUser.htmlUrl)
+                        putExtra(Intent.EXTRA_TITLE, shareText)
+                        type = "text/plain"
+                    },
+                    null,
+                )
+            startActivity(shareIntent)
+        }
     }
 
     private fun showUserDetailsView(githubUser: GithubUser) {

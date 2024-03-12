@@ -1,7 +1,6 @@
 package com.example.bfaasubmission1.ui.profile
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.newsapp.data.GithubUsersRepository
@@ -26,13 +25,10 @@ class ProfileDetailsViewModelFactory private constructor(
             @Volatile
             private var instance: ProfileDetailsViewModelFactory? = null
 
-            fun getInstance(
-                context: Context,
-                mApplication: Application,
-            ): ProfileDetailsViewModelFactory =
+            fun getInstance(mApplication: Application): ProfileDetailsViewModelFactory =
                 instance ?: synchronized(this) {
                     instance ?: ProfileDetailsViewModelFactory(
-                        Injection.provideGithubUsersRepository(context),
+                        Injection.provideGithubUsersRepository(),
                         Injection.provideFavoriteUsersRepository(mApplication),
                     )
                 }.also { instance = it }

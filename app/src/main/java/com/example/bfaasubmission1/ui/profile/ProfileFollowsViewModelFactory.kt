@@ -1,6 +1,5 @@
 package com.example.bfaasubmission1.ui.profile
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.newsapp.data.GithubUsersRepository
@@ -20,12 +19,10 @@ class ProfileFollowsViewModelFactory private constructor(private val githubUsers
             @Volatile
             private var instance: ProfileFollowsViewModelFactory? = null
 
-            fun getInstance(context: Context): ProfileFollowsViewModelFactory =
+            fun getInstance(): ProfileFollowsViewModelFactory =
                 instance ?: synchronized(this) {
                     instance ?: ProfileFollowsViewModelFactory(
-                        Injection.provideGithubUsersRepository(
-                            context,
-                        ),
+                        Injection.provideGithubUsersRepository(),
                     )
                 }.also { instance = it }
         }

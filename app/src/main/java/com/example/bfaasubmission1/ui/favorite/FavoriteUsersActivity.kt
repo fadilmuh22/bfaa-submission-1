@@ -1,6 +1,7 @@
 package com.example.bfaasubmission1.ui.favorite
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -39,20 +40,25 @@ class FavoriteUsersActivity : AppCompatActivity() {
 
         showFavoriteUsers(userListAdapter)
 
-        bindRecyclerView(userListAdapter)
+        setRecyclerView(userListAdapter)
     }
 
     private fun showFavoriteUsers(userListAdapter: UserListAdapter) {
         viewModel.getAllFavoriteUsers().observe(this) { favoriteUsers ->
-            userListAdapter.submitList(
-                favoriteUsers.map {
-                    GithubUser.fromFavoriteUserEntity(it)
-                },
-            )
+            if (favoriteUsers.isNullOrEmpty()) {
+                binding.tvNoFavorites.visibility = View.VISIBLE
+            } else {
+                binding.tvNoFavorites.visibility = View.GONE
+                userListAdapter.submitList(
+                    favoriteUsers.map {
+                        GithubUser.fromFavoriteUserEntity(it)
+                    },
+                )
+            }
         }
     }
 
-    private fun bindRecyclerView(userListAdapter: UserListAdapter) {
+    private fun setRecyclerView(userListAdapter: UserListAdapter) {
         binding.rvFavoriteUsers.apply {
             addItemDecoration(
                 DividerItemDecoration(

@@ -22,7 +22,7 @@ class ProfileFollowsFragment(
     private val githubUser: GithubUser?,
 ) : Fragment() {
     private val viewModel: ProfileFollowsViewModel by viewModels {
-        ProfileFollowsViewModelFactory.getInstance(requireContext())
+        ProfileFollowsViewModelFactory.getInstance()
     }
 
     override fun onCreateView(
@@ -50,21 +50,6 @@ class ProfileFollowsFragment(
         }
 
         bindRecyclerView(view, userListAdapter)
-    }
-
-    private fun showLoading(
-        view: View,
-        isLoading: Boolean,
-    ) {
-        val rvUsers: RecyclerView = view.findViewById(R.id.rvFollows)
-        val progressBar: View = view.findViewById(R.id.progressBarFollows)
-        if (isLoading) {
-            rvUsers.visibility = View.GONE
-            progressBar.visibility = View.VISIBLE
-        } else {
-            progressBar.visibility = View.GONE
-            rvUsers.visibility = View.VISIBLE
-        }
     }
 
     private fun toggleLoading(
@@ -121,14 +106,14 @@ class ProfileFollowsFragment(
             result?.let {
                 when (it) {
                     is Result.Error -> {
-                        showLoading(view, false)
+                        toggleLoading(view, false)
                         showErrorMessage(it.error)
                     }
                     Result.Loading -> {
-                        showLoading(view, true)
+                        toggleLoading(view, true)
                     }
                     is Result.Success -> {
-                        showLoading(view, false)
+                        toggleLoading(view, false)
                         toggleEmptyList(view, it.data.isEmpty())
                         if (it.data.isNotEmpty()) {
                             userListAdapter.submitList(it.data)

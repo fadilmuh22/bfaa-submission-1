@@ -6,16 +6,12 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Update
 import com.example.bfaasubmission1.data.local.entity.FavoriteUserEntity
 
 @Dao
 interface FavoriteUserDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(note: FavoriteUserEntity)
-
-    @Update
-    fun update(note: FavoriteUserEntity)
 
     @Delete
     fun delete(note: FavoriteUserEntity)

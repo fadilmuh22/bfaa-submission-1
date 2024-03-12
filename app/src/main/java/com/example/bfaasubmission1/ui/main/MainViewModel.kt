@@ -16,10 +16,6 @@ class MainViewModel(
         private const val MOST_FOLLOWED_QUERY = "followers:\\>1000"
     }
 
-    init {
-        getMostFollowedGithubUsers()
-    }
-
     fun getThemeSettings(): LiveData<Boolean> {
         return pref.getThemeSetting().asLiveData()
     }

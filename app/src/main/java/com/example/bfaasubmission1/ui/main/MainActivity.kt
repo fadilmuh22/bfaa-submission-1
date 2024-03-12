@@ -18,10 +18,11 @@ import com.example.bfaasubmission1.data.repository.dataStore
 import com.example.bfaasubmission1.databinding.ActivityMainBinding
 import com.example.bfaasubmission1.ui.adapter.UserListAdapter
 import com.example.bfaasubmission1.ui.favorite.FavoriteUsersActivity
+import com.example.bfaasubmission1.utils.Validator
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels {
-        MainViewModelFactory.getInstance(this, application.dataStore)
+        MainViewModelFactory.getInstance(application.dataStore)
     }
 
     private val binding by lazy {
@@ -47,9 +48,9 @@ class MainActivity : AppCompatActivity() {
 
         showMostFollowedUsers(userListAdapter)
 
-        bindRecyclerView(userListAdapter)
+        setRecyclerView(userListAdapter)
 
-        bindOptionMenu()
+        setOptionMenu()
     }
 
     private fun setSearchBar(userListAdapter: UserListAdapter) {
@@ -58,9 +59,20 @@ class MainActivity : AppCompatActivity() {
             searchView
                 .editText
                 .setOnEditorActionListener { textView, _, _ ->
-                    searchBar.setText(searchView.text)
+                    val searchText = textView.text.toString().trim()
+                    searchBar.setText(searchText)
                     searchView.hide()
-                    showSearchUsers(textView.text.toString(), userListAdapter)
+
+                    if (Validator.isSearchTextValid(searchText)) {
+                        Toast.makeText(
+                            this@MainActivity,
+                            getString(R.string.search_validation),
+                            Toast.LENGTH_SHORT,
+                        ).show()
+                        return@setOnEditorActionListener false
+                    }
+
+                    showSearchUsers(searchText, userListAdapter)
                     false
                 }
         }
@@ -69,16 +81,18 @@ class MainActivity : AppCompatActivity() {
     private fun setDarkModeMenu() {
         viewModel.getThemeSettings().observe(this) {
             if (it) {
-                binding.topAppBarMain.menu.findItem(R.id.action_theme).setIcon(R.drawable.baseline_dark_mode_24)
+                binding.topAppBarMain.menu.findItem(R.id.action_theme)
+                    .setIcon(R.drawable.baseline_dark_mode_24)
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             } else {
-                binding.topAppBarMain.menu.findItem(R.id.action_theme).setIcon(R.drawable.baseline_brightness_high_24)
+                binding.topAppBarMain.menu.findItem(R.id.action_theme)
+                    .setIcon(R.drawable.baseline_brightness_high_24)
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
     }
 
-    private fun bindOptionMenu() {
+    private fun setOptionMenu() {
         binding.topAppBarMain.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.action_favorite -> {
@@ -156,7 +170,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun bindRecyclerView(userListAdapter: UserListAdapter) {
+    private fun setRecyclerView(userListAdapter: UserListAdapter) {
         binding.rvPopularUsers.apply {
             addItemDecoration(
                 DividerItemDecoration(

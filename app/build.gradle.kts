@@ -76,10 +76,16 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.core.splashscreen)
 
-    testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.junit.v412)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.inline)
 
     implementation(libs.glide)
     implementation(libs.retrofit)

@@ -27,9 +27,5 @@ class FavoriteUsersRepository(application: Application) {
         executorService.execute { favoriteUserDao.delete(favoriteUser) }
     }
 
-    fun update(favoriteUser: FavoriteUserEntity) {
-        executorService.execute { favoriteUserDao.update(favoriteUser) }
-    }
-
     fun isFavorite(id: Int): LiveData<Boolean> = favoriteUserDao.isFavorite(id)
 }
