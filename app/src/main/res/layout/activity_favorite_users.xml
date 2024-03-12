@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.MainActivity">
+    tools:context=".ui.favorite.FavoriteUsersActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayoutMain"
@@ -13,26 +13,14 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topAppBarMain"
+            android:id="@+id/topAppBarFavorites"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:menu="@menu/main_menu"
-            app:title="@string/home_title" />
+            app:title="@string/favorite_title" />
 
-        <com.google.android.material.search.SearchBar
-            android:id="@+id/searchBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/searchbar_hint" />
 
     </com.google.android.material.appbar.AppBarLayout>
-
-    <com.google.android.material.search.SearchView
-        android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:hint="@string/searchbar_hint"
-        app:layout_anchor="@id/appBarLayoutMain" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -40,7 +28,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvPopularUsers"
+            android:id="@+id/rvFavoriteUsers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -48,12 +36,5 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <ProgressBar
-        android:id="@+id/progressBarMain"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

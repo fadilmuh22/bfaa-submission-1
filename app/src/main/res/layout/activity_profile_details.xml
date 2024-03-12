@@ -5,87 +5,95 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".ui.profile.ProfileDetailsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayoutProfile"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topAppBarProfile"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:statusBarScrim="@android:color/black"
+            app:titleEnabled="false">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="328dp"
+                android:fitsSystemWindows="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="none">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgProfile"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:layout_marginTop="100dp" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imgProfile"
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/tvUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/p_username"
+                    android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/tvUsername"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/p_username"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@id/imgProfile"
-                app:layout_constraintStart_toStartOf="@id/imgProfile"
-                app:layout_constraintTop_toBottomOf="@id/imgProfile" />
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/p_name"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/tvName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/p_name"
-                android:textSize="16sp"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@id/tvUsername"
-                app:layout_constraintStart_toStartOf="@id/tvUsername"
-                app:layout_constraintTop_toBottomOf="@id/tvUsername" />
+                <TextView
+                    android:id="@+id/tvFollows"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/p_follows"
+                    android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/tvFollows"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/p_follows"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@id/tvName"
-                app:layout_constraintStart_toStartOf="@id/tvName"
-                app:layout_constraintTop_toBottomOf="@id/tvName" />
+                <ProgressBar
+                    android:id="@+id/progressBarProfile"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible" />
+            </LinearLayout>
 
-            <ProgressBar
-                android:id="@+id/progressBarProfile"
-                style="?android:attr/progressBarStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="visible"
-                app:layout_constraintStart_toStartOf="@id/tvFollows"
-                app:layout_constraintEnd_toEndOf="@id/tvFollows"
-                app:layout_constraintTop_toTopOf="@id/tvFollows"/>
-
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBarProfile"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="top"
+                android:layout_marginBottom="48dp"
+                android:background="?attr/colorPrimary"
+                android:elevation="0dp"
+                app:layout_collapseMode="pin"
+                app:navigationIconTint="@android:color/white"
+                app:tabTextColor="@android:color/white"
+                app:titleTextColor="@android:color/white" />
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_gravity="bottom"
                 android:background="?attr/colorPrimary"
-                app:layout_constraintEnd_toEndOf="@id/tvFollows"
-                app:layout_constraintStart_toStartOf="@id/tvFollows"
-                app:layout_constraintTop_toBottomOf="@id/tvFollows"
+                app:layout_collapseMode="pin"
                 app:tabTextColor="@android:color/white" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -94,6 +102,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabFavorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/add_to_favorite"
+        android:src="@drawable/baseline_favorite_border_24"
+        app:backgroundTint="@color/primaryDark"
+        app:tint="@color/white" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -3,7 +3,7 @@ package com.example.bfaasubmission1.ui.adapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.bfaasubmission1.data.response.GithubUser
+import com.example.bfaasubmission1.data.remote.response.GithubUser
 import com.example.bfaasubmission1.ui.profile.ProfileFollowsFragment
 
 enum class Section {

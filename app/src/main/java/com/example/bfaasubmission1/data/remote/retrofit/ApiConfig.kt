@@ -1,4 +1,4 @@
-package com.example.bfaasubmission1.data.retrofit
+package com.example.bfaasubmission1.data.remote.retrofit
 
 import com.example.bfaasubmission1.BuildConfig
 import okhttp3.OkHttpClient

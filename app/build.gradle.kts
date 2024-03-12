@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("kotlin-parcelize")
+    id("com.google.devtools.ksp")
 }
 
 val keystoreFile = project.rootProject.file("local.properties")
@@ -62,9 +63,9 @@ android {
 }
 
 dependencies {
+    implementation(libs.material)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.legacy.support.v4)
@@ -74,6 +75,7 @@ dependencies {
     implementation(libs.androidx.viewpager2)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.datastore.preferences)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -84,4 +86,8 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
     implementation(libs.circleimageview)
+
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
 }
