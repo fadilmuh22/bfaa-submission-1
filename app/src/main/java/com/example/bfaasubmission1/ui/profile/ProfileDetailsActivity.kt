@@ -67,6 +67,11 @@ class ProfileDetailsActivity : AppCompatActivity() {
         }.attach()
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
+    }
+
     private fun toggleLoading(isLoading: Boolean) {
         if (isLoading) {
             binding.tvName.visibility = View.GONE
@@ -152,6 +157,7 @@ class ProfileDetailsActivity : AppCompatActivity() {
 
             binding.fabFavorite.setOnClickListener {
                 viewModel.setFavorite(githubUser, !isFavorite)
+                setResult(RESULT_OK)
                 Toast.makeText(
                     this,
                     getString(

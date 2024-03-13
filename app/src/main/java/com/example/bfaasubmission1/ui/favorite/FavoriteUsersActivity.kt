@@ -22,6 +22,10 @@ class FavoriteUsersActivity : AppCompatActivity() {
         FavoriteUsersViewModelFactory.getInstance(application)
     }
 
+    private val userListAdapter by lazy {
+        UserListAdapter()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -36,14 +40,17 @@ class FavoriteUsersActivity : AppCompatActivity() {
         setSupportActionBar(binding.topAppBarFavorites)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val userListAdapter = UserListAdapter()
+        showFavoriteUsers()
 
-        showFavoriteUsers(userListAdapter)
-
-        setRecyclerView(userListAdapter)
+        setRecyclerView()
     }
 
-    private fun showFavoriteUsers(userListAdapter: UserListAdapter) {
+    override fun onResume() {
+        super.onResume()
+        showFavoriteUsers()
+    }
+
+    private fun showFavoriteUsers() {
         viewModel.getAllFavoriteUsers().observe(this) { favoriteUsers ->
             if (favoriteUsers.isNullOrEmpty()) {
                 binding.tvNoFavorites.visibility = View.VISIBLE
@@ -58,7 +65,7 @@ class FavoriteUsersActivity : AppCompatActivity() {
         }
     }
 
-    private fun setRecyclerView(userListAdapter: UserListAdapter) {
+    private fun setRecyclerView() {
         binding.rvFavoriteUsers.apply {
             addItemDecoration(
                 DividerItemDecoration(

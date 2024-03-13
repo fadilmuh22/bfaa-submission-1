@@ -43,6 +43,7 @@ class UserListAdapter : ListAdapter<GithubUser, UserListAdapter.UserViewHolder>(
             val moveIntent =
                 Intent(holder.itemView.context, ProfileDetailsActivity::class.java).run {
                     putExtra(ProfileDetailsActivity.EXTRA_GITHUB_USER, getItem(position))
+                    setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 }
             holder.itemView.context.startActivity(moveIntent)
         }

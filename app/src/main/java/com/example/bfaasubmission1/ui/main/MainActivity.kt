@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                     searchBar.setText(searchText)
                     searchView.hide()
 
-                    if (Validator.isSearchTextValid(searchText)) {
+                    if (!Validator.isSearchTextValid(searchText)) {
                         Toast.makeText(
                             this@MainActivity,
                             getString(R.string.search_validation),
